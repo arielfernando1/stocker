@@ -23,16 +23,19 @@
                     onchange="calculateTotal()">
             </div>
         </div>
+        <!--Select2 items-->
         <div class="mb-4">
-            <label for="products" class="col-sm-2">Producto</label>
+            <label for="items" class="col-sm-2">Item</label>
             <div class="col-sm-10">
-                <select wire:model='selectedItem' wire:click='getInfo' name="item_id" id="products"
-                    class="form-control dark:bg-gray-600" autofocus required>
-                    <option value="">Seleccionar prod. o serv.</option>
-                    @foreach ($items as $item)
-                        <option value="{{ $item->id }}">{{ $item->name }} {{ $item->brand }}</option>
-                    @endforeach
-                </select>
+                <div wire:ignore>
+                    <select class="form-control" id="items">
+                        <option value="">Seleccionar prod. o serv.</option>
+                        @foreach ($items as $item)
+                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach
+
+                    </select>
+                </div>
             </div>
 
         </div>
@@ -54,14 +57,15 @@
                 </div>
             </div>
         @endif
+        <!-- Price -->
         <div class="mb-4">
-
             <label for="price" class="col-sm-2">Precio Unitario</label>
             <div class="col-sm-10">
                 <input wire:model='price' type="number" step="0.01" name="price" id="price"
                     class="form-control text-center dark:bg-gray-600">
             </div>
         </div>
+        <!-- Total -->
         <div class="mb-4">
             <label for="total" class="col-sm-2">Total</label>
             <div class="col-sm-10">
@@ -69,9 +73,23 @@
                     class="form-control text-center dark:bg-gray-600" required>
             </div>
         </div>
+
         <button id="register" type="submit"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded dark:bg-blue-950"><i
                 class="bi bi-cash"></i>
             Registrar</button>
     </form>
 </div>
+<script>
+    $(document).ready(function() {
+        $('#items').select2();
+        $('#items').on('change', function(e) {
+            var data = $('#items').select2("val");
+            @this.set('selectedItem', data);
+            @this.call('getInfo');
+        });
+        document.addEventListener('saleAdded', function() {
+            $('#items').val(null).trigger('change');
+        });
+    });
+</script>

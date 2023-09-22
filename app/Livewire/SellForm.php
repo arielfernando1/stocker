@@ -28,6 +28,11 @@ class SellForm extends Component
         );
     }
 
+    public function hydrate()
+    {
+        $this->dispatch('select2');
+    }
+
     public function getInfo()
     {
         $item = Item::find($this->selectedItem);
