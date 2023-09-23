@@ -8,6 +8,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ReportController;
 use App\Mail\DailyReport;
+use App\Models\Business;
 use Illuminate\Support\Facades\Mail;
 
 /*
@@ -51,11 +52,11 @@ Route::middleware([
     })->name('inventory');
 
     Route::get('/settings', function () {
-        return view('settings');
+        return view('settings/index');
     })->name('settings');
 
     Route::get('sendmail', function () {
-        $recipient = 'arielferaguirre.2001@gmail.com';
+        $recipient = Business::first()->email;
         Mail::to($recipient)->send(new DailyReport());
     })->name('mails.dailyreport');
 

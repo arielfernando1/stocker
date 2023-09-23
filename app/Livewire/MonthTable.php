@@ -19,6 +19,7 @@ class MonthTable extends Component
                     ->whereMonth('created_at', date('m', strtotime($this->date)))
                     ->whereYear('created_at', date('Y', strtotime($this->date)))
                     ->groupBy('date')
+                    ->orderBy('date', 'asc')
                     ->get()
             ]
         );

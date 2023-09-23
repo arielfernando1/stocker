@@ -10,6 +10,7 @@ class NewItem extends ModalComponent
 {
     public $is_service = false;
     public $categories = [];
+    public Category $category;
     public $name;
     public $brand;
     public $stock;

@@ -1,4 +1,4 @@
-<div class="p-4">
+<div class="p-4 shadow-xl rounded-xl">
     <div class="flex justify-between items-center mb-4">
         <!-- Month Selector -->
         <label for="date" class="block mr-4 dark:text-gray-200">Seleccione un mes:</label>
@@ -9,7 +9,7 @@
     </div>
 
     <!-- Sales Table -->
-    <table class="table-auto w-full dark:text-gray-200">
+    <table class="table-auto w-full text-gray-600">
         <thead>
             <tr>
                 <th class="px-4 py-2">Dia</th>
@@ -45,7 +45,7 @@
         </tbody>
     </table>
     <!-- Total Sales for the Month -->
-    <div class="text-lg font-semibold dark:text-gray-200 text-center m-8">
+    <div class="text-lg font-semibold dark:text-gray-600 text-center m-8">
         Total: ${{ $sales->sum('total') }}
     </div>
 </div>

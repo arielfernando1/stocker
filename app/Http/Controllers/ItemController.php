@@ -61,7 +61,7 @@ class ItemController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateItemRequest $request, Item $item)
+    public function update(Item $item)
     {
         //
     }
@@ -74,6 +74,5 @@ class ItemController extends Controller
         $item = Item::find($item->id);
         Item::destroy($item->id);
         return redirect()->route('items.index');
-
     }
 }

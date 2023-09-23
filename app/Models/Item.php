@@ -29,4 +29,5 @@ class Item extends Model
     {
         return $this->hasMany(Sale::class);
     }
+
 }

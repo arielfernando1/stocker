@@ -1,5 +1,5 @@
 <div>
-    <div class="overflow-x-auto">
+    <div class="overflow-x-auto m-3">
         <input wire:model.live="search" type="text" placeholder="Buscar categorias ..."
             class="mb-4 px-4 py-2 border border-gray-300 rounded-md">
         <button wire:click="$dispatch('openModal', { component: 'new-category' })"

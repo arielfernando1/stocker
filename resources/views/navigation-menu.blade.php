@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 dark:bg-gray-700 dark:text-gray-50">
+<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 dark:bg-gray-700 dark:text-gray-50 dark:border-gray-600 mb-3">
 
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -97,7 +97,7 @@
                                 </button>
                             @else
                                 <span class="inline-flex rounded-md">
-                                    <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                                    <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150 dark:bg-gray-600 dark:text-gray-400">
                                         {{ Auth::user()->name }}
 
                                         <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -118,7 +118,7 @@
                                 {{ __('Profile') }}
                             </x-dropdown-link>
 
-                            <x-dropdown-link href="#" :active="request()->routeIs('reports.index')">
+                            <x-dropdown-link href="{{route('settings')}}" :active="request()->routeIs('reports.index')">
                                 {{ __('Ajustes') }}
                             </x-dropdown-link>
 

@@ -10,10 +10,14 @@
             <label>Categoría</label>
             <select wire:model="category_id"
                 class="mt-1 p-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-indigo-300">
-                <option value="">Seleccione una categoría</option>
-                @foreach ($categories as $category)
-                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
+                @if ($category)
+                    <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                @else
+                    <option value="">Seleccione una categoría</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                @endif
             </select>
         </div>
 
@@ -23,7 +27,7 @@
                 class="mt-1 p-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-indigo-300"
                 placeholder="Nombre del producto" required>
             @error('name')
-            <div class="text-red-500 text-sm">{{ $message }}</div>
+                <div class="text-red-500 text-sm">{{ $message }}</div>
             @enderror
         </div>
         <div class="mb-4">
@@ -32,7 +36,7 @@
                 class="mt-1 p-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-indigo-300"
                 placeholder="Marca del producto">
             @error('brand')
-            <div class="text-red-500 text-sm">{{ $message }}</div>
+                <div class="text-red-500 text-sm">{{ $message }}</div>
             @enderror
         </div>
         <div class="mb-4">
@@ -41,7 +45,7 @@
                 class="mt-1 p-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-indigo-300"
                 placeholder="Stock del producto">
             @error('stock')
-            <div class="text-red-500 text-sm">{{ $message }}</div>
+                <div class="text-red-500 text-sm">{{ $message }}</div>
             @enderror
         </div>
         <div class="mb-4">
@@ -50,7 +54,7 @@
                 class="mt-1 p-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-indigo-300"
                 placeholder="Costo del producto">
             @error('cost')
-            <div class="text-red-500 text-sm">{{ $message }}</div>
+                <div class="text-red-500 text-sm">{{ $message }}</div>
             @enderror
         </div>
         <div class="mb-4">
@@ -59,7 +63,7 @@
                 class="mt-1 p-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-indigo-300"
                 placeholder="Precio del producto" required>
             @error('price')
-            <div class="text-red-500 text-sm">{{ $message }}</div>
+                <div class="text-red-500 text-sm">{{ $message }}</div>
             @enderror
         </div>
         <div class="mb-4">
@@ -68,7 +72,7 @@
                 class="mt-1 p-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-indigo-300"
                 placeholder="Descripción del producto">
             @error('description')
-            <div class="text-red-500 text-sm">{{ $message }}</div>
+                <div class="text-red-500 text-sm">{{ $message }}</div>
             @enderror
         </div>
 
