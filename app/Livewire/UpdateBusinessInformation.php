@@ -23,14 +23,15 @@ class UpdateBusinessInformation extends Component
         return view('livewire.update-business-information');
     }
 
-    public function mount(){
-        $this->name = Business::first()->name;
-        $this->address = Business::first()->address;
-        $this->phone = Business::first()->phone;
-        $this->email = Business::first()->email;
-        $this->ruc = Business::first()->ruc;
-        $this->logo = Business::first()->logo;
-        $this->web = Business::first()->web;
+    public function mount()
+    {
+        $this->name = Business::first()->name ?? '';
+        $this->address = Business::first()->address ?? '';
+        $this->phone = Business::first()->phone ?? '';
+        $this->email = Business::first()->email ?? '';
+        $this->ruc = Business::first()->ruc ?? '';
+        $this->logo = Business::first()->logo ?? '';
+        $this->web = Business::first()->web ?? '';
     }
 
     public function updateBusinessInfo()
@@ -42,15 +43,28 @@ class UpdateBusinessInformation extends Component
             'email' => 'required',
             'ruc' => 'required',
         ]);
-        Business::first()->update([
-            'name' => $this->name,
-            'address' => $this->address,
-            'phone' => $this->phone,
-            'email' => $this->email,
-            'ruc' => $this->ruc,
-            'logo' => $this->logo,
-            'web' => $this->web,
-        ]);
+        if (Business::first()) {
+            Business::first()->update([
+                'name' => $this->name,
+                'address' => $this->address,
+                'phone' => $this->phone,
+                'email' => $this->email,
+                'ruc' => $this->ruc,
+                'logo' => $this->logo,
+                'web' => $this->web,
+            ]);
+        } else {
+            Business::create([
+                'name' => $this->name,
+                'address' => $this->address,
+                'phone' => $this->phone,
+                'email' => $this->email,
+                'ruc' => $this->ruc,
+                'logo' => $this->logo,
+                'web' => $this->web,
+            ]);
+        }
+
         $this->dispatch('saved');
     }
 }

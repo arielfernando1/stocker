@@ -2,8 +2,12 @@
 
 namespace App\Livewire;
 
+use App\Mail\StockAlert;
+use App\Models\Business;
 use App\Models\Item;
 use App\Models\Sale;
+use Illuminate\Support\Facades\Mail;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class SellForm extends Component
@@ -29,7 +33,7 @@ class SellForm extends Component
 
     public function loadItems()
     {
-        $this->items = Item::all(['id', 'name']);
+        $this->items = Item::all(['id', 'name', 'brand']);
     }
 
     public function hydrate()
@@ -71,6 +75,21 @@ class SellForm extends Component
         $item->save();
     }
 
+    #[On('saleAdded')]
+    public function checkStock($selectedItem)
+    {
+        $item = Item::find($selectedItem);
+        if ($item->stock == 0) {
+            $this->sendStockAlert($item);
+        }
+    }
+
+    public function sendStockAlert($item)
+    {
+        $businessEmail = Business::first()->email;
+        Mail::to($businessEmail)->send(new StockAlert($item));
+    }
+
     public function save()
     {
         $this->validateInput();
@@ -82,8 +101,8 @@ class SellForm extends Component
         ]);
 
         $this->updateStock();
+        $this->dispatch('saleAdded', selectedItem: $this->selectedItem);
         $this->resetForm();
-        $this->dispatch('saleAdded');
     }
 
     private function validateInput()

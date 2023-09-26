@@ -8,6 +8,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ReportController;
 use App\Mail\DailyReport;
+use App\Mail\StockAlert;
 use App\Models\Business;
 use Illuminate\Support\Facades\Mail;
 
@@ -23,7 +24,7 @@ use Illuminate\Support\Facades\Mail;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 Route::middleware([
@@ -56,9 +57,25 @@ Route::middleware([
     })->name('settings');
 
     Route::get('sendmail', function () {
-        $recipient = Business::first()->email;
-        Mail::to($recipient)->send(new DailyReport());
+        try {
+            $recipient = Business::first()->email;
+            Mail::to($recipient)->send(new DailyReport());
+            return 'Mail sent successfully';
+        } catch (\Throwable $th) {
+            dd($th);
+        }
     })->name('mails.dailyreport');
+
+    Route::get('sendstockalert', function () {
+        try {
+            $recipient = Business::first()->email;
+            $item = Item::first();
+            Mail::to($recipient)->send(new StockAlert($item));
+            return 'Mail sent successfully';
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+    })->name('mails.stockalert');
 
     # Items
     Route::get('/items', [ItemController::class, 'index'])->name('items.index');

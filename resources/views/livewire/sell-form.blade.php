@@ -15,12 +15,17 @@
         @error('total')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
+        @if ($stock == 0)
+            <span
+                class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">No
+                hay stock</span>
+        @endif
         <div class="mb-4">
             <label for="quantity" class="col-sm-2">Cantidad</label>
             <div class="col-sm-10">
                 <input wire:model='quantity' wire:click='calculateTotal' min="1" type="number" value="1"
                     name="quantity" id="qty" class="form-control text-center dark:bg-gray-600"
-                    onchange="calculateTotal()" max="{{$maxQuantity}}">
+                    onchange="calculateTotal()" max="{{ $maxQuantity }}">
             </div>
         </div>
         <!--Select2 items-->
@@ -31,21 +36,18 @@
                     <select class="form-control" id="items">
                         <option value="">Seleccionar prod. o serv.</option>
                         @foreach ($items as $item)
-                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            <option value="{{ $item->id }}">{{ $item->name }} {{$item->brand}}</option>
                         @endforeach
 
                     </select>
                 </div>
             </div>
-
         </div>
-
-
         <div class="mb-4">
             <label>Stock</label>
             <div class="col-sm-10">
                 <input wire:model='stock' type="number" name="stock" id="stock"
-                    class="form-control text-center dark:bg-gray-600" max="{{$stock}}" disabled>
+                    class="form-control text-center dark:bg-gray-600" max="{{ $stock }}" disabled>
             </div>
         </div>
         <!-- Price -->
