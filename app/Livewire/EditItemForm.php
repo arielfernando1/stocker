@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Livewire\Forms\ItemForm;
+use App\Models\Category;
 use App\Models\Item;
 use Livewire\Component;
 
@@ -11,6 +12,7 @@ class EditItemForm extends Component
 {
     public ItemForm $form;
     public Item $item;
+    public $categories;
     public function render()
     {
         return view('livewire.edit-item-form');
@@ -18,8 +20,10 @@ class EditItemForm extends Component
 
     public function mount()
     {
+        $this->categories = Category::all();
         $this->form->name = $this->item->name;
         $this->form->brand = $this->item->brand;
+        $this->form->stock = $this->item->stock;
         $this->form->cost = $this->item->cost;
         $this->form->price = $this->item->price;
         $this->form->description = $this->item->description;

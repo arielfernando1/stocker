@@ -80,6 +80,9 @@ class SellForm extends Component
     public function checkStock($selectedItem)
     {
         $item = Item::find($selectedItem);
+        if ($item->is_service) {
+            return;
+        }
         if ($item->stock == 0) {
             $this->sendStockAlert($item);
         }

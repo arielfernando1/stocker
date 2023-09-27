@@ -12,12 +12,17 @@
 
     <form wire:submit="save">
 
-        {{-- <div class="mb-4">
+        <div class="mb-4">
             <label for="category" class="block">Categoria</label>
-            <select wire:model="item.category_id" class="form-select dark:bg-gray-800" name="category_id" id="category_id">
-                <option value="{{ $item->category->id }}">{{ $item->category->name }}</option>
+            <select wire:model="form.category_id" class="form-select dark:bg-gray-800" name="category_id"
+                id="category_id">
+                <option value="{{ $item->category->id }}" selected>{{ $item->category->name }}</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
             </select>
-        </div> --}}
+
+        </div>
 
         <div class="mb-4">
             <label for="name" class="block text-gray-700">Nombre</label>
@@ -34,24 +39,22 @@
             <input wire:model="form.brand" type="text" name="brand" id="brand"
                 class="form-input dark:bg-gray-800" placeholder="" aria-describedby="helpId">
         </div>
-
-        {{-- @if (!$item->is_service)
+        @if (!$item->is_service)
             <div class="mb-4">
                 <label for="stock" class="block text-gray-700">Stock</label>
-                <input wire:model.defer="item.stock" type="number" min="0" name="stock" id="stock"
-                    class="form-input dark:bg-gray-800" placeholder="Existencias" aria-describedby="helpId" disabled>
+                <input wire:model.defer="form.stock" type="number" min="0" name="stock" id="stock"
+                    class="form-input dark:bg-gray-800" placeholder="Existencias" aria-describedby="helpId">
             </div>
-        @endif --}}
-
+        @endif
         <div class="mb-4">
             <label for="cost" class="block text-gray-700">Costo</label>
-            <input wire:model="form.cost" type="number" step="0.001" min="0.001" name="cost" id="cost"
+            <input wire:model="form.cost" type="number" step="0.01" min="0.01" name="cost" id="cost"
                 class="form-input dark:bg-gray-800" placeholder="" aria-describedby="helpId">
         </div>
 
         <div class="mb-4">
             <label for="price" class="block text-gray-700">Precio</label>
-            <input wire:model="form.price" type="number" step="0.001" min="0.001" name="price" id="price"
+            <input wire:model="form.price" type="number" step="0.01" min="0.01" name="price" id="price"
                 class="form-input dark:bg-gray-800" placeholder="" aria-describedby="helpId">
             <p id="helpId" class="text-gray-600">Precio de venta al público</p>
         </div>
