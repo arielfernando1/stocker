@@ -71,17 +71,17 @@
 </head>
 <body>
     <div class="container">
-        <h1>Hello,</h1>
-        <p>Here is the daily sales report:</p>
+        <h1>Hola,</h1>
+        <p>Estas son las ganancias del dia de hoy</p>
         <div class="total">
             <span class="total-label">Total:</span>
             <span class="total-value">{{ $today }}</span>
         </div>
-        <h2>Details:</h2>
+        <h2>Detalles:</h2>
         <table>
             <thead>
                 <tr>
-                    <th>Time</th>
+                    <th>Hora</th>
                     <th>Item</th>
                 </tr>
             </thead>

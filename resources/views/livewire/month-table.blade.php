@@ -38,9 +38,17 @@
                             <td class="px-4 py-2">${{ $sale->total }}</td>
                     @endswitch
                     <td class="px-4 py-2">
-                        <a href="#" class="btn btn-primary"><i class="bi bi-eye"></i> Ver</a>
+                        <button
+                            wire:click="$dispatch('openModal', { component: 'day-sales', arguments: {date: {{ $sale->date}}} })">
+                            <i class="bi bi-eye"></i> Detalles</button>
+                        {{-- <button
+                            wire:click="$dispatch('openModal', { component: 'edit-user', arguments: { user: {{ $user->id }} }})">Edit
+                            User</button> --}}
+
+
                     </td>
                 </tr>
+
             @endforeach
         </tbody>
     </table>
