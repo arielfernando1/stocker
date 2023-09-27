@@ -18,7 +18,7 @@ class SellForm extends Component
     public $stock = 0;
     public $quantity = 1;
     public $maxQuantity = 0;
-    public $is_service = false;
+    public $is_service = true;
     public $total = 0;
 
     public function render()
@@ -46,6 +46,7 @@ class SellForm extends Component
         $item = $this->getItem();
         $this->price = $item->price ?? 0;
         $this->stock = $item->stock ?? 0;
+        $this->is_service = $item->is_service ?? false;
         $this->updateMaxQuantity();
         $this->calculateTotal();
     }
@@ -57,7 +58,7 @@ class SellForm extends Component
 
     public function updateMaxQuantity()
     {
-        $this->maxQuantity = $this->stock;
+        $this->maxQuantity = $this->is_service ? 1000 : $this->stock;
     }
 
     public function calculateTotal()
