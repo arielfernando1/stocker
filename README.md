@@ -1,3 +1,2 @@
 # Stocker
-
-Working on it...
+![Alt text](https://i.ibb.co/Wc6tp1q/stocker.png)
