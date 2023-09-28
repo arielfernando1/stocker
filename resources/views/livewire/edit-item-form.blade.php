@@ -16,10 +16,10 @@
             <label for="category" class="block">Categoria</label>
             <select wire:model="form.category_id" class="form-select dark:bg-gray-800" name="category_id"
                 id="category_id">
-                <option value="{{ $item->category->id }}" selected>{{ $item->category->name }}</option>
-                {{-- @foreach ($categories as $category)
+                {{-- <option value="{{ $item->category->id }}" selected>{{ $item->category->name }}</option> --}}
+                @foreach ($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach --}}
+                @endforeach
             </select>
 
         </div>
