@@ -13,6 +13,12 @@
     <form wire:submit="save">
 
         <div class="mb-4">
+            <label for="is_service" class="block">Seleccione </label>
+            <input wire:model="form.is_service" type="radio" name="item" value="0" checked> Producto
+            <input wire:model="form.is_service" type="radio" name="item" value="1"> Servicio
+        </div>
+
+        <div class="mb-4">
             <label for="category" class="block">Categoria</label>
             <select wire:model="form.category_id" class="form-select dark:bg-gray-800" name="category_id"
                 id="category_id">
