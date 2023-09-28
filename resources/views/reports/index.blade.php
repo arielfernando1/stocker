@@ -8,7 +8,7 @@
         <livewire:salescount />
         <livewire:total-incomes />
     </div>
-    <div class="flex m-6">
+    <div class="flex">
         <livewire:month-table />
     </div>
 </x-app-layout>

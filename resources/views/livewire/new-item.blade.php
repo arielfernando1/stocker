@@ -2,13 +2,13 @@
     <form wire:submit="save" class="w-full max-w-md mx-auto">
         <div class="mb-4">
             <label>Seleccione </label>
-            <input wire:model="is_service" type="radio" name="item" value="0" checked> Producto
-            <input wire:model="is_service" type="radio" name="item" value="1"> Servicio
+            <input wire:model="form.is_service" type="radio" name="item" value="0" checked> Producto
+            <input wire:model="form.is_service" type="radio" name="item" value="1"> Servicio
 
         </div>
         <div class="mb-4">
             <label>Categoría</label>
-            <select wire:model="category_id"
+            <select wire:model="form.category_id"
                 class="mt-1 p-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-indigo-300">
                 @if ($category)
                     <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
@@ -19,56 +19,59 @@
                     @endforeach
                 @endif
             </select>
+            @error('form.category_id')
+                <div class="text-red-500 text-sm">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-4">
             <label for="name" class="block font-medium ">Producto</label>
-            <input wire:model="name" type="text" id="name"
+            <input wire:model="form.name" type="text" id="name"
                 class="mt-1 p-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-indigo-300"
-                placeholder="Nombre del producto" required>
-            @error('name')
+                placeholder="Nombre del producto">
+            @error('form.name')
                 <div class="text-red-500 text-sm">{{ $message }}</div>
             @enderror
         </div>
         <div class="mb-4">
             <label for="brand" class="block font-medium">Marca</label>
-            <input wire:model="brand" type="text" id="brand"
+            <input wire:model="form.brand" type="text" id="brand"
                 class="mt-1 p-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-indigo-300"
                 placeholder="Marca del producto">
-            @error('brand')
+            @error('form.brand')
                 <div class="text-red-500 text-sm">{{ $message }}</div>
             @enderror
         </div>
         <div class="mb-4">
             <label for="stock" class="block font-medium ">Stock</label>
-            <input wire:model="stock" type="number" id="stock"
+            <input wire:model="form.stock" type="number" id="stock"
                 class="mt-1 p-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-indigo-300"
                 placeholder="Stock del producto">
-            @error('stock')
+            @error('form.stock')
                 <div class="text-red-500 text-sm">{{ $message }}</div>
             @enderror
         </div>
         <div class="mb-4">
             <label for="cost" class="block font-medium">Costo</label>
-            <input wire:model="cost" type="number" step="0.01" id="cost"
+            <input wire:model="form.cost" type="number" step="0.01" id="cost"
                 class="mt-1 p-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-indigo-300"
                 placeholder="Costo del producto">
-            @error('cost')
+            @error('form.cost')
                 <div class="text-red-500 text-sm">{{ $message }}</div>
             @enderror
         </div>
         <div class="mb-4">
             <label for="price" class="block font-medium ">Precio</label>
-            <input wire:model="price" type="number" step="0.01" id="price"
+            <input wire:model="form.price" type="number" step="0.01" id="price"
                 class="mt-1 p-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-indigo-300"
-                placeholder="Precio del producto" required>
-            @error('price')
+                placeholder="Precio del producto">
+            @error('form.price')
                 <div class="text-red-500 text-sm">{{ $message }}</div>
             @enderror
         </div>
         <div class="mb-4">
             <label for="description" class="block font-medium">Descripción</label>
-            <input wire:model="description" type="text" id="description"
+            <input wire:model="form.description" type="text" id="description"
                 class="mt-1 p-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-indigo-300"
                 placeholder="Descripción del producto">
             @error('description')

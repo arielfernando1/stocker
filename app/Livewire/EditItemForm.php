@@ -21,6 +21,7 @@ class EditItemForm extends Component
     public function mount()
     {
         $this->categories = Category::all();
+        $this->form->category_id = $this->item->category_id;
         $this->form->name = $this->item->name;
         $this->form->brand = $this->item->brand;
         $this->form->stock = $this->item->stock;

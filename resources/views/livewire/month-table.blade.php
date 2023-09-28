@@ -39,7 +39,7 @@
                     @endswitch
                     <td class="px-4 py-2">
                         <button
-                            wire:click="$dispatch('openModal', { component: 'day-sales', arguments: {date: {{ $sale->date}}} })">
+                            wire:click="$dispatch('openModal', { component: 'day-sales', arguments: {date: {{ $sale->date }}} })">
                             <i class="bi bi-eye"></i> Detalles</button>
                         {{-- <button
                             wire:click="$dispatch('openModal', { component: 'edit-user', arguments: { user: {{ $user->id }} }})">Edit
@@ -48,7 +48,6 @@
 
                     </td>
                 </tr>
-
             @endforeach
         </tbody>
     </table>
