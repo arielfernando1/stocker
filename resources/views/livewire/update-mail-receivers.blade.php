@@ -1,4 +1,4 @@
-<x-form-section submit="updateBusinessInfo">
+<x-form-section submit="update">
 
     <x-slot name="title">
         {{ __('Reportes') }}
