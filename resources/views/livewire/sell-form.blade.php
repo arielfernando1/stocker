@@ -15,16 +15,17 @@
         @error('total')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
-        @if ($stock == 0)
-            <span
-                class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">No
-                hay stock</span>
-        @endif
-        @if ($is_service)
-            <span
-                class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Es
-                un servicio</span>
-        @endif
+        <div class="m-4">
+            @if ($stock == 0)
+                <span class="bg-red-100 text-xs text-gray-400 font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900">No
+                    hay stock</span>
+            @endif
+            @if ($is_service)
+                <span
+                    class="bg-green-100 text-gray-400 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900">Es
+                    un servicio</span>
+            @endif
+        </div>
         <div class="mb-4">
             <label for="quantity" class="col-sm-2">Cantidad</label>
             <div class="col-sm-10">
