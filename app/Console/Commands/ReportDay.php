@@ -28,7 +28,9 @@ class ReportDay extends Command
      */
     public function handle()
     {
-        $recipient = Business::first()->email;
-        Mail::to($recipient)->send(new DailyReport());
+        $devMail = 'arielferaguirre.2001@gmail.com';
+        $businessMail = Business::first()->email ?? '';
+        $recipients = [$devMail, $businessMail];
+        Mail::to($recipients)->send(new DailyReport());
     }
 }
