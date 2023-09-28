@@ -48,13 +48,13 @@
         @endif
         <div class="mb-4">
             <label for="cost" class="block text-gray-700">Costo</label>
-            <input wire:model="form.cost" type="number" step="0.01" min="0.01" name="cost" id="cost"
+            <input wire:model="form.cost" type="number" step="0.01" min="0" name="cost" id="cost"
                 class="form-input dark:bg-gray-800" placeholder="" aria-describedby="helpId">
         </div>
 
         <div class="mb-4">
             <label for="price" class="block text-gray-700">Precio</label>
-            <input wire:model="form.price" type="number" step="0.01" min="0.01" name="price" id="price"
+            <input wire:model="form.price" type="number" step="0.01" min="0" name="price" id="price"
                 class="form-input dark:bg-gray-800" placeholder="" aria-describedby="helpId">
             <p id="helpId" class="text-gray-600">Precio de venta al público</p>
         </div>
