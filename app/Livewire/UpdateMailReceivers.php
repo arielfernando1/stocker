@@ -15,7 +15,7 @@ class UpdateMailReceivers extends Component
 
     public function mount()
     {
-        $this->report_hour = Preference::where('name', 'report_hour')->first()->value;
+        $this->report_hour = Preference::where('name', 'report_hour')->first()->value ?? '';
     }
 
     public function update()
