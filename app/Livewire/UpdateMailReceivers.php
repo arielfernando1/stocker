@@ -24,11 +24,13 @@ class UpdateMailReceivers extends Component
         if ($preference) {
             $preference->value = $this->report_hour;
             $preference->save();
+            $this->dispatch('saved');
         } else {
             $preference = new Preference();
             $preference->name = 'report_hour';
             $preference->value = $this->report_hour;
             $preference->save();
+            $this->dispatch('saved');
         }
     }
 }

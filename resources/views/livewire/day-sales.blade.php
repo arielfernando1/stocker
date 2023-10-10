@@ -1,35 +1,37 @@
-<div>
-    <table>
+<div class="p-4">
+    <!-- Select export format -->
+    <label for="exportFormat" class="mr-2">Formato a exportar:</label>
+    <select wire:model="selectedFormat" id="exportFormat" class="mr-4">
+        <option value="pdf">PDF</option>
+        <option value="csv">CSV</option>
+    </select>
+    <table class="w-full border-collapse border border-gray-300 my-2">
         <thead>
-            <tr>
-                <th>Fecha</th>
-                <th>Item</th>
-                <th>Cantidad</th>
-                <th>Total</th>
+            <tr class="bg-gray-200">
+                <th class="px-4 py-2">Fecha</th>
+                <th class="px-4 py-2">Item</th>
+                <th class="px-4 py-2">Cantidad</th>
+                <th class="px-4 py-2">Total</th>
             </tr>
         </thead>
         <tbody>
-            {{$date}}
             @foreach ($sales as $sale)
-                <tr>
-                    <td>{{ $sale->created_at }}</td>
-                    <td>{{ $sale->item->name }}</td>
-                    <td>{{ $sale->quantity }}</td>
-                    <td>{{ $sale->total }}</td>
-                    <td>
-                        <button
-                            wire:click="$dispatch('openModal', { component: 'day-sales', arguments: {date: {{ $sale}}} })">
-                            <i class="bi bi-eye"></i> Detalles</button>
-                    </td>
+                <tr class="border-b border-gray-300">
+                    <td class="px-4 py-2">{{ $sale->created_at }}</td>
+                    <td class="px-4 py-2">{{ $sale->item->name }}</td>
+                    <td class="px-4 py-2">{{ $sale->quantity }}</td>
+                    <td class="px-4 py-2">{{ $sale->total }}</td>
                 </tr>
-
             @endforeach
         </tbody>
         <tfoot>
-            <tr>
-                <td colspan="3">Total</td>
-                <td>{{ $sales->sum('total') }}</td>
+            <tr class="bg-gray-200">
+                <td class="px-4 py-2" colspan="3">Total</td>
+                <td class="px-4 py-2">{{ '$' . $sales->sum('total') }}</td>
             </tr>
         </tfoot>
     </table>
+    <button wire:click="export" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"><i
+            class="bi bi-download"></i> Exportar</button>
+
 </div>

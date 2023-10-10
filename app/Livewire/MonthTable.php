@@ -27,6 +27,6 @@ class MonthTable extends Component
 
     public function mount()
     {
-        $this->date = date('Y-m-d');
+        $this->date = date('Y-m');
     }
 }
