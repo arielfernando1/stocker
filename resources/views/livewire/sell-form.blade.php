@@ -16,14 +16,17 @@
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
         <div class="m-4">
-            @if ($stock == 0)
-                <span class="bg-red-100 text-xs text-gray-400 font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900">No
-                    hay stock</span>
-            @endif
-            @if ($is_service)
-                <span
-                    class="bg-green-100 text-gray-400 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900">Es
-                    un servicio</span>
+            @if ($selectedItem)
+                @if ($stock == 0)
+                    <span
+                        class="bg-red-100 text-xs text-gray-400 font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900">No
+                        hay stock</span>
+                @endif
+                @if ($is_service)
+                    <span
+                        class="bg-green-100 text-gray-400 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900">Es
+                        un servicio</span>
+                @endif
             @endif
         </div>
         <div class="mb-4">
@@ -91,4 +94,15 @@
             $('#items').val(null).trigger('change');
         });
     });
+
+    document.addEventListener('livewire:init', () => {
+        Livewire.on('emailError', () => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Ha ocurrido un error al enviar el correo, por favor configuralo en Ajustes',
+            })
+        })
+
+    })
 </script>

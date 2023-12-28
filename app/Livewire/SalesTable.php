@@ -8,21 +8,21 @@ use App\Models\Sale;
 
 class SalesTable extends Component
 {
-    public $sales = [];
+    public $sales;
     public $hidden = false;
-    public function render()
+    public function render(): \Illuminate\View\View
     {
-        return view('livewire.sales-table');
+        return $this->sales->count() ? view('livewire.sales-table') : view('livewire.no-data');
     }
 
 
-    #[On('saleAdded')]
-    public function mount()
+    #[On('updateSales')]
+    public function mount(): void
     {
         $this->sales = Sale::whereDate('created_at', date('Y-m-d'))->get();
     }
 
-    public function toggleHidden()
+    public function toggleHidden(): void
     {
         $this->hidden = !$this->hidden;
     }

@@ -22,7 +22,7 @@
                     <td class="px-6 py-1 whitespace-nowrap">
                         {{ $sale->created_at->format('H:i:s') }}
                     </td>
-                    <td wire:click="$dispatch('openModal', { component: 'show-sale', arguments: {id: {{ $sale->id }}} })"
+                    <td wire:click="$dispatch('openModal', { component: 'show-sale', arguments: {sale: {{ $sale }}} })"
                         class="px-6 hover:bg-gray-200 py-1 whitespace-nowrap dark:hover:bg-gray-600">
                         @if ($sale->quantity > 1)
                             {{ $sale->item->name }} x {{ $sale->quantity }}
@@ -43,11 +43,14 @@
                 </td>
                 <td></td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    <strong id="totalDay" @if ($hidden) style="display:none" @endif>${{ $sales->sum('total') }}</strong>
-                    <i id="eye" class="bi @if ($hidden) bi-eye @else bi-eye-slash @endif" wire:click="toggleHidden"></i>
+                    <strong id="totalDay"
+                        @if ($hidden) style="display:none" @endif>${{ $sales->sum('total') }}</strong>
+                    <i id="eye" class="bi @if ($hidden) bi-eye @else bi-eye-slash @endif"
+                        wire:click="toggleHidden"></i>
                 </td>
             </tr>
         </tfoot>
     </table>
+
 
 </div>

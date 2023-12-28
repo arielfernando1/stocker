@@ -13,6 +13,18 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        Category::factory()->count(24)->create();
+        Category::create([
+            'name' => 'Default',
+            'description' => 'Categoría por defecto',
+        ]);
+        Category::create([
+            'name' => 'Procesadores',
+            'description' => 'Categoría de procesadores',
+        ]);
+        Category::create([
+            'name' => 'Tarjetas de video',
+            'description' => 'Categoría de tarjetas de video',
+        ]);
+
     }
 }

@@ -4,11 +4,17 @@
             Reportes
         </h2>
     </x-slot>
-    <div class="flex m-6 space-x-4">
+
+    <div class="mx-auto mt-6 flex justify-center items-center space-x-4">
         <livewire:salescount />
         <livewire:total-incomes />
     </div>
-    <div class="flex">
+
+    <div class="mt-6 max-w-3xl mx-auto">
         <livewire:month-table />
     </div>
+    <div class="mt-6 max-w-3xl mx-auto">
+        <livewire:incomes-chart />
+    </div>
+
 </x-app-layout>

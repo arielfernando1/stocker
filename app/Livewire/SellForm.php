@@ -90,8 +90,15 @@ class SellForm extends Component
 
     public function sendStockAlert($item)
     {
-        $businessEmail = Business::first()->email;
-        Mail::to($businessEmail)->send(new StockAlert($item));
+        try {
+            $businessEmail = Business::first()->email;
+            if (!$businessEmail) {
+                return;
+            }
+            $this->sendEmail($item, $businessEmail);
+        } catch (\Exception $e) {
+            $this->dispatch('emailError', $e->getMessage());
+        }
     }
 
     public function save()
@@ -106,6 +113,7 @@ class SellForm extends Component
 
         $this->updateStock();
         $this->dispatch('saleAdded', selectedItem: $this->selectedItem);
+        $this->dispatch('updateSales');
         $this->resetForm();
     }
 

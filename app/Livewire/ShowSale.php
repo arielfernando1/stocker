@@ -7,27 +7,30 @@ use LivewireUI\Modal\ModalComponent;
 
 class ShowSale extends ModalComponent
 {
-    public $id;
     public $sale;
     public function render()
     {
         return view('livewire.show-sale');
     }
 
-    public function mount($id)
+    public function mount(Sale $sale)
     {
-        $this->getSaleInfo($id);
+        $this->sale = $sale;
     }
 
-    public function getSaleInfo($id)
+    public function delete(Sale $sale): void
     {
-        $this->sale = Sale::find($id);
-    }
-
-    public function delete($id)
-    {
-        Sale::destroy($id);
+        $sale->delete();
+        $this->restoreStock($sale);
         $this->closeModal();
-        return redirect()->route('sell');
+        $this->dispatch('updateSales');
+    }
+
+    public function restoreStock(Sale $sale): void
+    {
+        $saleItem = $sale->item;
+        $saleItem->stock += $sale->quantity;
+        $saleItem->save();
+
     }
 }

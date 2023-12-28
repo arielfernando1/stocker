@@ -9,7 +9,7 @@
         <button class="bg-blue-500 hover:bg-blue-700 m-5 text-white font-bold py-2 px-4 rounded"
             onclick="Livewire.dispatch('openModal', { component: 'new-item' })">Agregar</button>
         <button class="bg-green-500 hover:bg-green-700 m-5 text-white font-bold py-2 px-4 rounded"
-            onclick="Livewire.dispatch('openModal', { component: 'sell-form' })">Importar desde CSV</button>
+            onclick="Livewire.dispatch('openModal', { component: 'items-c-s-v' })">Importar desde CSV</button>
 
     </div>
 
