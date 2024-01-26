@@ -8,6 +8,7 @@ use Livewire\Form;
 
 class ItemForm extends Form
 {
+    public Item $item;
     #[Rule('required')]
     public $is_service = false;
     #[Rule('required')]
@@ -21,7 +22,7 @@ class ItemForm extends Form
     public $price;
     public $profit = 30;
     public $description;
-    // define messages
+
     protected $messages = [
         'category_id.required' => 'La categoría es requerida',
         'name.required' => 'El nombre es requerido',
@@ -40,10 +41,39 @@ class ItemForm extends Form
         'description.min' => 'La descripción debe tener mínimo 3 caracteres',
     ];
 
+    public function setItem(Item $item)
+    {
+        $this->item = $item;
+        $this->is_service = $item->is_service;
+        $this->category_id = $item->category_id;
+        $this->name = $item->name;
+        $this->brand = $item->brand;
+        $this->stock = $item->stock;
+        $this->cost = $item->cost;
+        $this->price = $item->price;
+        $this->profit = $item->profit;
+        $this->description = $item->description;
+    }
+
     public function store()
     {
         $this->validate();
         Item::create($this->all());
+    }
+
+    public function update()
+    {
+        $this->validate();
+        $this->item->update($this->all());
+    }
+
+    public function save()
+    {
+        if ($this->item->id) {
+            $this->update();
+        } else {
+            $this->store();
+        }
     }
 
 
@@ -51,7 +81,7 @@ class ItemForm extends Form
     {
         if ($this->cost && $this->price) {
             $this->profit = number_format(($this->price - $this->cost) / $this->cost * 100, 2);
-            if($this->profit < 0) {
+            if ($this->profit < 0) {
                 return $this->addError('profit', 'El precio no puede ser menor al costo');
             }
         }

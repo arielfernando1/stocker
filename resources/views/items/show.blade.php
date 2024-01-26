@@ -3,17 +3,17 @@
         <div class="mb-4 text-center">
             <div class="bg-gray-50 text-gray-600 p-7 shadow-lg rounded-xl text-center my-4 dark:bg-gray-800">
                 <h2 class="text-2xl font-semibold">Detalles del {{ $item->is_service ? 'Servicio' : 'Producto' }}</h2>
-                <ul class="list-disc list-inside mt-4">
+                <ul class="mt-4">
                     <li><i class="bi bi-plus"></i> Creado el: {{ $item->created_at }}</li>
                     @if ($item->created_at != $item->updated_at)
                         <li><i class="bi bi-arrow-clockwise"></i> Modificado el: {{ $item->updated_at }}</li>
                     @endif
-                    <li><i class="bi bi-bookmark-fill"></i> PID: {{ $item->id }}</li>
+                    <li>ID: {{ $item->id }}</li>
                     <li>
                         @if ($sales && $sales->count() > 0)
-                            {{ $sales->count() }} ventas
+                            <label class="text-green-500"> {{ $sales->count() }} ventas</label>
                         @else
-                            Sin ventas
+                            <label class="text-red-500">Sin ventas</label>
                         @endif
                     </li>
                 </ul>
@@ -23,7 +23,7 @@
                     {{ session('success') }}
                 </div>
             @endif
-            <livewire:edit-item-form :item="$item" />
+            {{-- <livewire:edit-item-form :item="$item" /> --}}
             @if ($sales->count() > 0)
                 <div class="shadow-xl rounded-xl">
                     <h4 class="text-2xl text-gray-600 font-semibold m-3">Historial de ventas</h4>

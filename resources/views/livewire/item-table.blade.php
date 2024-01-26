@@ -15,7 +15,7 @@
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Precio</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Descripción
                 </th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Editar</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
             </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200 text-gray-600 dark:bg-gray-800">
@@ -73,8 +73,11 @@
                     <td class="px-6 py-4 whitespace-nowrap">{{ $item->description }}</td>
 
                     <td class="px-6 py-4 whitespace-nowrap">
-                        <a href="{{ route('items.show', $item->id) }}" class="btn btn-primary"><i
-                                class="bi bi-eye"></i> Ver</a>
+                        <a href="{{ route('items.show', $item->id) }}" class="text-green-500 font-bold">Ver</a>
+                        <button class="text-blue-500 font-bold rounded"
+                            wire:click="$dispatch('openModal', { component: 'new-item', arguments: { item: {{ $item }} }})">Editar</button>
+
+
                     </td>
                 </tr>
             @endforeach

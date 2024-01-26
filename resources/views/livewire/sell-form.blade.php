@@ -32,7 +32,7 @@
         <div class="mb-4">
             <label for="quantity" class="col-sm-2">Cantidad</label>
             <div class="col-sm-10">
-                <input wire:model='quantity' wire:click='calculateTotal' min="1" type="number" value="1"
+                <input wire:model='quantity' wire:change='calculateTotal' min="1" type="number" value="1"
                     name="quantity" id="qty" class="form-control text-center dark:bg-gray-600"
                     onchange="calculateTotal()" max="{{ $maxQuantity }}">
             </div>
