@@ -7,13 +7,18 @@ use Livewire\Component;
 
 class IncomesChart extends Component
 {
-    public $year = 2023;
+    public $year;
     public $incomes = [];
     public function render()
     {
         return view('livewire.incomes-chart', [
             'incomes' => $this->refreshIncomes($this->year)
         ]);
+    }
+
+    public function mount()
+    {
+        $this->year = date('Y');
     }
 
     public function updatedYear()
