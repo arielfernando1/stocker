@@ -77,8 +77,8 @@
         </div>
 
         <button id="register" type="submit"
-            class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded dark:bg-blue-950"><i
-                class="bi bi-cash"></i>
+            class="{{ $stock == 0 ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600' }} text-white font-bold py-2 px-4 rounded-xl"
+            {{ $stock == 0 ? 'disabled' : '' }}><i class="bi bi-cash"></i>
             Registrar</button>
     </form>
 </div>

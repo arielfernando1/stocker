@@ -2,11 +2,9 @@
 
 namespace App\Livewire;
 
-use App\Mail\StockAlert;
 use App\Models\Business;
 use App\Models\Item;
 use App\Models\Sale;
-use Illuminate\Support\Facades\Mail;
 use Livewire\Attributes\On;
 use Livewire\Component;
 

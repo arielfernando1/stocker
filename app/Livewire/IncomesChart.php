@@ -7,7 +7,6 @@ use Livewire\Component;
 
 class IncomesChart extends Component
 {
-    public $months = [];
     public function render()
     {
         return view('livewire.incomes-chart', [
@@ -17,13 +16,5 @@ class IncomesChart extends Component
                 ->groupBy('month')
                 ->pluck('incomes', 'month')
         ]);
-    }
-
-    public function mount()
-    {
-        $this->months = [
-            'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
-            'September', 'October', 'November','December'
-        ];
     }
 }
