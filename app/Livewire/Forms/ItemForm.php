@@ -19,6 +19,7 @@ class ItemForm extends Form
     public $cost;
     #[Rule('required')]
     public $price;
+    public $profit = 30;
     public $description;
     // define messages
     protected $messages = [
@@ -38,4 +39,28 @@ class ItemForm extends Form
         'description.max' => 'La descripción debe tener máximo 255 caracteres',
         'description.min' => 'La descripción debe tener mínimo 3 caracteres',
     ];
+
+    public function store()
+    {
+        $this->validate();
+        Item::create($this->all());
+    }
+
+
+    public function calculateProfit()
+    {
+        if ($this->cost && $this->price) {
+            $this->profit = number_format(($this->price - $this->cost) / $this->cost * 100, 2);
+            if($this->profit < 0) {
+                return $this->addError('profit', 'El precio no puede ser menor al costo');
+            }
+        }
+    }
+
+    public function calculatePrice()
+    {
+        if ($this->profit) {
+            $this->price = number_format($this->cost * (1 + $this->profit / 100), 2);
+        }
+    }
 }

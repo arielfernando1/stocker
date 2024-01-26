@@ -5,21 +5,11 @@ namespace App\Livewire;
 use App\Livewire\Forms\ItemForm;
 use App\Models\Category;
 use LivewireUI\Modal\ModalComponent;
-use App\Models\Item;
 
 class NewItem extends ModalComponent
 {
-    // public $is_service = false;
-    // public $category_id;
     public $categories = [];
     public Category $category;
-    // public $name;
-    // public $brand;
-    // public $stock;
-    // public $cost;
-    // public $price;
-    // public $description;
-    // Item form
     public ItemForm $form;
     public function render()
     {
@@ -33,13 +23,23 @@ class NewItem extends ModalComponent
 
     public function save()
     {
-        $this->validate();
-        // uppercase name and brand
-        $this->form->name = strtoupper($this->form->name);
-        $this->form->brand = strtoupper($this->form->brand);
-        Item::create($this->form->all());
-        // debug created item
+        $this->form->store();
         $this->closeModal();
         $this->dispatch('itemAdded');
+    }
+
+    public function updatedFormCost()
+    {
+        $this->form->calculatePrice();
+    }
+
+    public function updatedFormPrice()
+    {
+        $this->form->calculateProfit();
+    }
+
+    public function updatedFormProfit()
+    {
+        $this->form->calculatePrice();
     }
 }

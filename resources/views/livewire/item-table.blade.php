@@ -45,21 +45,19 @@
                     <td class="px-6 py-4 whitespace-nowrap">{{ $item->brand }}</td>
                     @switch(true)
                         @case($item->stock === null)
-                            <td class="px-6 py-4 whitespace-nowrap text-warning"></td>
+                            <td class="px-6 py-4 whitespace-nowrap bg-gray-200 dark:bg-gray-950">
+                                <strong>NO APLICA</strong>
+                            </td>
                         @break
 
-                        @case($item->stock === 0)
-                            <td class="px-6 py-4 whitespace-nowrap text-danger"><strong>{{ $item->stock }}</strong></td>
-                        @break
-
-                        @case($item->stock < 0)
-                            <td class="px-6 py-4 whitespace-nowrap bg-yellow-200 dark:bg-yellow-950">
+                        @case($item->stock == 0)
+                            <td class="px-6 py-4 whitespace-nowrap bg-red-200 dark:bg-yellow-950">
                                 <strong>{{ $item->stock }}</strong>
                             </td>
                         @break
 
                         @case($item->stock < 10)
-                            <td class="px-6 py-4 whitespace-nowrap bg-red-200 dark:bg-red-950">
+                            <td class="px-6 py-4 whitespace-nowrap bg-yellow-200 dark:bg-red-950">
                                 <strong>{{ $item->stock }}</strong>
                             </td>
                         @break

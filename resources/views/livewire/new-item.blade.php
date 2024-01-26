@@ -53,7 +53,7 @@
         </div>
         <div class="mb-4">
             <label for="cost" class="block font-medium">Costo</label>
-            <input wire:model="form.cost" type="number" step="0.01" id="cost"
+            <input wire:model.live="form.cost" type="number" step="0.01" id="cost"
                 class="mt-1 p-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-indigo-300"
                 placeholder="Costo del producto">
             @error('form.cost')
@@ -62,10 +62,19 @@
         </div>
         <div class="mb-4">
             <label for="price" class="block font-medium ">Precio</label>
-            <input wire:model="form.price" type="number" step="0.01" id="price"
+            <input wire:model.live="form.price" type="number" step="0.01" id="price"
                 class="mt-1 p-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-indigo-300"
                 placeholder="Precio del producto">
             @error('form.price')
+                <div class="text-red-500 text-sm">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="mb-4">
+            <label for="profit" class="block font-medium">Porcentaje de ganancia</label>
+            <input wire:model.live="form.profit" type="number" step="0.01" id="percent_profit"
+                class="mt-1 p-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-indigo-300"
+                placeholder="Porcentaje de ganancia">
+            @error('form.profit')
                 <div class="text-red-500 text-sm">{{ $message }}</div>
             @enderror
         </div>
