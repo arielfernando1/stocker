@@ -10,6 +10,7 @@ use LivewireUI\Modal\ModalComponent;
 class NewItem extends ModalComponent
 {
     public Item $item;
+    public $is_service = false;
     public $categories = [];
     public Category $category;
     public ItemForm $form;
@@ -44,5 +45,10 @@ class NewItem extends ModalComponent
     public function updatedFormProfit()
     {
         $this->form->calculatePrice();
+    }
+
+    public function updatedIsService()
+    {
+        $this->form->stock = $this->is_service ? null : 0;
     }
 }

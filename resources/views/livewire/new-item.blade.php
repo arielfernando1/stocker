@@ -1,9 +1,8 @@
 <div class="flex p-14 dark:bg-gray-700 dark:text-gray-400">
     <form wire:submit="save" class="w-full max-w-md mx-auto">
         <div class="mb-4">
-            <label>Seleccione </label>
-            <input wire:model="form.is_service" type="radio" name="item" value="0" checked> Producto
-            <input wire:model="form.is_service" type="radio" name="item" value="1"> Servicio
+            <input wire:model.live="is_service" type="radio" name="item" value="0" checked> Producto
+            <input wire:model.live="is_service" type="radio" name="item" value="1"> Servicio
 
         </div>
         <div class="mb-4">
@@ -45,8 +44,8 @@
         <div class="mb-4">
             <label for="stock" class="block font-medium ">Stock</label>
             <input wire:model="form.stock" type="number" id="stock"
-                class="mt-1 p-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-indigo-300"
-                placeholder="Stock del producto">
+                class="mt-1 p-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-indigo-300 disabled:bg-red-600"
+                placeholder="Stock del producto" @if ($is_service) disabled @endif>
             @error('form.stock')
                 <div class="text-red-500 text-sm">{{ $message }}</div>
             @enderror
