@@ -20,7 +20,7 @@ class ItemTable extends Component
             'items' => Item::where('name', 'like', '%' . $this->search . '%')
                 ->orWhere('brand', 'like', '%' . $this->search . '%')
                 ->orWhere('description', 'like', '%' . $this->search . '%')
-                ->paginate(10)
+                ->paginate(50)
         ]);
     }
 }
