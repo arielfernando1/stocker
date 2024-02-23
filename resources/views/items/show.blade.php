@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="flex justify-center">
         <div class="mb-4 text-center">
-            <div class="bg-gray-50 text-gray-600 p-7 shadow-lg rounded-xl text-center my-4 dark:bg-gray-800">
+            <x-card-container>
                 <h2 class="text-2xl font-semibold">Detalles del {{ $item->is_service ? 'Servicio' : 'Producto' }}</h2>
                 <ul class="mt-4">
                     <li><i class="bi bi-plus"></i> Creado el: {{ $item->created_at }}</li>
@@ -17,7 +17,7 @@
                         @endif
                     </li>
                 </ul>
-            </div>
+            </x-card-container>
             @if (session('success'))
                 <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
                     {{ session('success') }}
@@ -27,22 +27,7 @@
             @if ($sales->count() > 0)
                 <div class="shadow-xl rounded-xl">
                     <h4 class="text-2xl text-gray-600 font-semibold m-3">Historial de ventas</h4>
-                    <table class="w-full text-gray-600">
-                        <thead>
-                            <tr>
-                                <th class="px-4 py-2 border-b-2">Fecha</th>
-                                <th class="px-4 py-2 border-b-2">Cantidad</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($sales as $sale)
-                                <tr>
-                                    <td class="px-4 py-2 border-b">{{ $sale->created_at }}</td>
-                                    <td class="px-4 py-2 border-b">{{ $sale->quantity }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <livewire:items.sale-history :item_id="$item->id" />
                 </div>
             @endif
         </div>

@@ -16,18 +16,17 @@
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
         <div class="m-4">
-            @if ($selectedItem)
+            {{-- @if ($selectedItem)
                 @if ($stock == 0)
                     <span
                         class="bg-red-100 text-xs text-gray-400 font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900">No
                         hay stock</span>
-                @endif
-                @if ($is_service)
+                @elseif(@$stock)
                     <span
                         class="bg-green-100 text-gray-400 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900">Es
                         un servicio</span>
                 @endif
-            @endif
+            @endif --}}
         </div>
         <div class="mb-4">
             <label for="quantity" class="col-sm-2">Cantidad</label>
@@ -56,7 +55,7 @@
             <label>Stock</label>
             <div class="col-sm-10">
                 <input wire:model='stock' type="number" name="stock" id="stock"
-                    class="form-control text-center dark:bg-gray-600" max="{{ $stock }}" disabled>
+                    class="form-control text-center dark:bg-gray-600 disabled:bg-yellow-400" @if ($stock == 0) disabled @endif>
             </div>
         </div>
         <!-- Price -->

@@ -1,12 +1,21 @@
-<div class="flex p-14 dark:bg-gray-700 dark:text-gray-400">
+<div class="flex p-14 dark:bg-gray-800">
     <form wire:submit="save" class="w-full max-w-md mx-auto">
-        <div class="mb-4">
-            <input wire:model.live="is_service" type="radio" name="item" value="0" checked> Producto
-            <input wire:model.live="is_service" type="radio" name="item" value="1"> Servicio
+        <div>
+            @if ($item)
+                <h1 class="text-2xl font-bold text-center mb-4">Editar {{ $item->name }}</h1>
+            @else
+                <h1 class="text-2xl font-bold text-center mb-4">Nuevo Item</h1>
+            @endif
+        </div>
+        <div class="mb-4 flex items-center space-x-4">
+            <x-input wire:model.live='is_service' type="radio" name="item" value="0" />
+            <x-label for="is_service" :value="__('Producto')" />
+            <x-input wire:model.live='is_service' type="radio" name="item" value="1" />
+            <x-label for="is_service" :value="__('Servicio')" />
 
         </div>
         <div class="mb-4">
-            <label>Categoría</label>
+            <x-label for="category_id" :value="__('Categoría')" />
             <select wire:model="form.category_id"
                 class="mt-1 p-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-indigo-300">
                 @if ($category)
@@ -24,70 +33,49 @@
         </div>
 
         <div class="mb-4">
-            <label for="name" class="block font-medium ">Producto</label>
-            <input wire:model="form.name" type="text" id="name"
-                class="mt-1 p-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-indigo-300"
-                placeholder="Nombre del producto">
-            @error('form.name')
-                <div class="text-red-500 text-sm">{{ $message }}</div>
-            @enderror
+            <x-label for="name" :value="__('Nombre')" />
+            <x-input id="name" wire:model="form.name" class="block mt-1 w-full" type="text" name="name" />
+            <x-input-error for="form.name" class="mt-2" />
         </div>
         <div class="mb-4">
-            <label for="brand" class="block font-medium">Marca</label>
-            <input wire:model="form.brand" type="text" id="brand"
-                class="mt-1 p-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-indigo-300"
-                placeholder="Marca del producto">
-            @error('form.brand')
-                <div class="text-red-500 text-sm">{{ $message }}</div>
-            @enderror
+            <x-label for="brand" :value="__('Marca')" />
+            <x-input id="brand" wire:model="form.brand" class="block mt-1 w-full" type="text" name="brand" />
+            <x-input-error for="form.brand" class="mt-2" />
         </div>
         <div class="mb-4">
-            <label for="stock" class="block font-medium ">Stock</label>
-            <input wire:model="form.stock" type="number" id="stock"
-                class="mt-1 p-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-indigo-300 disabled:bg-red-600"
-                placeholder="Stock del producto" @if ($is_service) disabled @endif>
-            @error('form.stock')
-                <div class="text-red-500 text-sm">{{ $message }}</div>
-            @enderror
+            <x-label for="stock" :value="__('Stock')" />
+            <x-input wire:model="form.stock" type="number" id="stock"
+                class="mt-1 p-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-indigo-300 disabled:bg-red-100"
+                placeholder="Stock del producto" :disabled="$is_service" />
         </div>
         <div class="mb-4">
-            <label for="cost" class="block font-medium">Costo</label>
-            <input wire:model.live="form.cost" type="number" step="0.01" id="cost"
-                class="mt-1 p-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-indigo-300"
-                placeholder="Costo del producto">
-            @error('form.cost')
-                <div class="text-red-500 text-sm">{{ $message }}</div>
-            @enderror
+            <x-label for="cost" :value="__('Costo')" />
+            <x-input id="cost" wire:model="form.cost" class="block mt-1 w-full" type="number" step="0.01"
+                name="cost" />
+            <x-input-error for="form.cost" class="mt-2" />
         </div>
         <div class="mb-4">
-            <label for="price" class="block font-medium ">Precio</label>
-            <input wire:model.live="form.price" type="number" step="0.01" id="price"
-                class="mt-1 p-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-indigo-300"
-                placeholder="Precio del producto">
-            @error('form.price')
-                <div class="text-red-500 text-sm">{{ $message }}</div>
-            @enderror
+            <x-label for="price" :value="__('Precio')" />
+            <x-input id="price" wire:model="form.price" class="block mt-1 w-full" type="number" step="0.01"
+                name="price" />
+            <x-input-error for="form.price" class="mt-2" />
         </div>
         <div class="mb-4">
-            <label for="profit" class="block font-medium">Porcentaje de ganancia</label>
-            <input wire:model.live="form.profit" type="number" step="0.01" id="percent_profit"
+            <x-label for="profit" :value="__('Porcentaje de ganancia')" />
+            <x-input wire:model.live='form.profit' type="number" step="0.01" id="percent_profit"
                 class="mt-1 p-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-indigo-300"
-                placeholder="Porcentaje de ganancia">
-            @error('form.profit')
-                <div class="text-red-500 text-sm">{{ $message }}</div>
-            @enderror
+                placeholder="Porcentaje de ganancia" />
+            <x-input-error for="form.profit" class="mt-2" />
         </div>
         <div class="mb-4">
-            <label for="description" class="block font-medium">Descripción</label>
-            <input wire:model="form.description" type="text" id="description"
+            <x-label for="description" :value="__('Descripción')" />
+            <textarea wire:model="form.description" id="description"
                 class="mt-1 p-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-indigo-300"
-                placeholder="Descripción del producto">
-            @error('description')
-                <div class="text-red-500 text-sm">{{ $message }}</div>
-            @enderror
+                placeholder="Descripción del producto"></textarea>
+            <x-input-error for="form.description" class="mt-2" />
         </div>
-
-        <button id="register" type="submit"
-            class="bg-indigo-500 text-white p-2 rounded-md hover:bg-indigo-600 transition duration-300 ease-in-out">Registrar</button>
+        <x-button>
+            {{ __('Guardar') }}
+        </x-button>
     </form>
 </div>

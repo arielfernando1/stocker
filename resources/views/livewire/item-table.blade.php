@@ -5,24 +5,23 @@
     <table class="min-w-full divide-y my-7 divide-gray-200">
         <thead class="bg-gray-50 dark:bg-gray-800">
             <tr>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipo</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Categoria</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Marca</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Stock</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Costo</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Precio</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Descripción
-                </th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                <x-table-header :value="__('ID')" />
+                <x-table-header :value="__('Tipo')" />
+                <x-table-header :value="__('Categoria')" />
+                <x-table-header :value="__('Nombre')" />
+                <x-table-header :value="__('Marca')" />
+                <x-table-header :value="__('Stock')" />
+                <x-table-header :value="__('Costo')" />
+                <x-table-header :value="__('Precio')" />
+                <x-table-header :value="__('Descripción')" />
+                <x-table-header :value="__('Acciones')" />
             </tr>
         </thead>
-        <tbody class="bg-white divide-y divide-gray-200 text-gray-600 dark:bg-gray-800">
+        <tbody>
             @foreach ($items as $item)
                 <tr>
-                    <td class="px-6 py-4 whitespace-nowrap">{{ $item->id }}</td>
-                    <td>
+                    <x-table-cell :value="$item->id" />
+                    <x-table-cell>
                         @if ($item->is_service)
                             <span
                                 class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
@@ -34,51 +33,41 @@
                                 Producto
                             </span>
                         @endif
-                    </td>
-                    <td>
+                    </x-table-cell>
+                    <x-table-cell>
                         <span
                             class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
                             {{ $item->category->name }}
                         </span>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">{{ $item->name }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap">{{ $item->brand }}</td>
+                    </x-table-cell>
+                    <x-table-cell :value="$item->name" />
+                    <x-table-cell :value="$item->brand" />
                     @switch(true)
                         @case($item->stock === null)
-                            <td class="px-6 py-4 whitespace-nowrap bg-gray-200 dark:bg-gray-950">
-                                <strong>NO APLICA</strong>
-                            </td>
+                            <x-table-cell :class="'bg-gray-200 dark:bg-gray-950'" :value="'NO APLICA'" :center="true" />
                         @break
 
                         @case($item->stock == 0)
-                            <td class="px-6 py-4 whitespace-nowrap bg-red-200 dark:bg-yellow-950">
-                                <strong>{{ $item->stock }}</strong>
-                            </td>
+                            <x-table-cell :class="'bg-red-200 dark:bg-red-950'" :value="$item->stock" :center="true" />
                         @break
 
                         @case($item->stock < 10)
-                            <td class="px-6 py-4 whitespace-nowrap bg-yellow-200 dark:bg-red-950">
-                                <strong>{{ $item->stock }}</strong>
-                            </td>
+                            <x-table-cell :class="'bg-yellow-200 dark:bg-yellow-950'" :value="$item->stock" :center="true" />
                         @break
 
                         @default
-                            <td class="px-6 py-4 whitespace-nowrap bg-green-200 dark:bg-green-950">
-                                <strong>{{ $item->stock }}</strong>
-                            </td>
+                            <x-table-cell :class="'bg-green-200 dark:bg-green-950'" :value="$item->stock" :center="true" />
                     @endswitch
 
-                    <td class="px-6 py-4 whitespace-nowrap">{{ $item->cost }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap">{{ $item->price }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap">{{ $item->description }}</td>
+                    <x-table-cell :value="$item->cost" />
+                    <x-table-cell :value="$item->price" />
+                    <x-table-cell :value="$item->description" />
 
-                    <td class="px-6 py-4 whitespace-nowrap">
+                    <x-table-cell>
                         <a href="{{ route('items.show', $item->id) }}" class="text-green-500 font-bold">Ver</a>
                         <button class="text-blue-500 font-bold rounded"
                             wire:click="$dispatch('openModal', { component: 'new-item', arguments: { item: {{ $item }} }})">Editar</button>
-
-
-                    </td>
+                    </x-table-cell>
                 </tr>
             @endforeach
         </tbody>

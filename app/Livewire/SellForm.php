@@ -56,7 +56,7 @@ class SellForm extends Component
 
     public function updateMaxQuantity()
     {
-        $this->maxQuantity = $this->is_service ? 1000 : $this->stock;
+        $this->maxQuantity = $this->stock == null ? 100 : $this->stock;
     }
 
     public function calculateTotal()
@@ -67,7 +67,7 @@ class SellForm extends Component
     public function updateStock()
     {
         $item = $this->getItem();
-        if ($item->is_service) {
+        if ($item->stock == null) {
             return;
         }
         $item->stock = $item->stock - $this->quantity;
@@ -78,7 +78,7 @@ class SellForm extends Component
     public function checkStock($selectedItem)
     {
         $item = Item::find($selectedItem);
-        if ($item->is_service) {
+        if ($item->stock == null) {
             return;
         }
         if ($item->stock == 0) {

@@ -12,20 +12,6 @@
             </div>
         @endif
 
-        <!-- demo user and password -->
-        <div class="mb-4 font-medium text-sm text-gray-600">
-            <p>demo user:
-                <span class="font-bold">
-                    demo@stocker.com
-                </span>
-            </p>
-            <p>demo password:
-                <span class="font-bold">
-                    demo
-                </span>
-            </p>
-        </div>
-
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
