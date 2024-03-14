@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreItemRequest;
 use App\Http\Requests\UpdateItemRequest;
 use App\Models\Item;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 
 class ItemController extends Controller
@@ -74,5 +75,13 @@ class ItemController extends Controller
         $item = Item::find($item->id);
         Item::destroy($item->id);
         return redirect()->route('items.index');
+    }
+
+    public function exportPdf()
+    {
+        // items that stock is not null
+        $items = Item::whereNotNull('stock')->get();
+        $pdf =Pdf::loadView('items/pdf', compact('items'));
+        return $pdf->download('items.pdf');
     }
 }

@@ -79,8 +79,10 @@ Route::middleware([
 
     # Items
     Route::get('/items', [ItemController::class, 'index'])->name('items.index');
+    Route::get('/items/export', [ItemController::class, 'exportPdf'])->name('items.export');
     Route::get('/items/{item}', [ItemController::class, 'show'])->name('items.show');
     Route::delete('/items/{item}', [ItemController::class, 'destroy'])->name('items.destroy');
+
     # Categories
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
     Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
