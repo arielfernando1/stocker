@@ -5,7 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PDF View</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid #999;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 
 <body class="bg-gray-100 font-sans">
@@ -16,15 +31,15 @@
             <table class="table-auto w-full">
                 <thead>
                     <tr>
-                        <th class="bg-gray-200 text-gray-700">ID</th>
-                        <th class="bg-gray-200 text-gray-700">Nombre</th>
-                        <th class="bg-gray-200 text-gray-700">Marca</th>
-                        <th class="bg-gray-200 text-gray-700">Costo</th>
-                        <th class="bg-gray-200 text-gray-700">Precio</th>
-                        <th class="bg-gray-200 text-gray-700">Stock</th>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Marca</th>
+                        <th>Costo</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
                     </tr>
                 </thead>
-                <tbody class="text-gray-600">
+                <tbody>
                     @foreach ($items as $item)
                         <tr>
                             <td class="border">{{ $item->id }}</td>
