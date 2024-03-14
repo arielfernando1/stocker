@@ -2,25 +2,44 @@
 
 namespace App\Livewire;
 
+use Rappasoft\LaravelLivewireTables\DataTableComponent;
+use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Item;
-use Livewire\Attributes\On;
-use Livewire\Component;
-use Livewire\WithPagination;
 
-class ItemTable extends Component
+class ItemTable extends DataTableComponent
 {
-    use WithPagination;
+    protected $model = Item::class;
 
-    public $search = '';
-
-    #[On('itemAdded')]
-    public function render()
+    public function configure(): void
     {
-        return view('livewire.item-table', [
-            'items' => Item::where('name', 'like', '%' . $this->search . '%')
-                ->orWhere('brand', 'like', '%' . $this->search . '%')
-                ->orWhere('description', 'like', '%' . $this->search . '%')
-                ->paginate(50)
-        ]);
+        $this->setPrimaryKey('id')->setTableRowUrl(function ($row) {
+            return route('items.show', $row);
+        });
+        $this->setSecondaryHeaderEnabled();
+
+
+        $this->setDefaultSort('name', 'asc');
+    }
+
+    public function columns(): array
+    {
+        return [
+            Column::make("Id", "id")
+                ->sortable(),
+            Column::make("Categoria", "category.name")
+                ->sortable(),
+            Column::make("Nombre", "name")
+                ->sortable()->searchable(),
+            Column::make("Marca", "brand")
+                ->sortable()->searchable(),
+            Column::make("Stock", "stock")
+                ->sortable(),
+            Column::make("Costo", "cost")
+                ->sortable(),
+            Column::make("Precio", "price")
+                ->sortable(),
+            Column::make("Descripcion", "description")
+                ->sortable()
+        ];
     }
 }
