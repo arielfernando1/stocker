@@ -14,7 +14,7 @@
         th,
         td {
             border: 1px solid #999;
-            padding: 8px;
+            padding: 2px;
         }
 
         th {

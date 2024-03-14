@@ -80,7 +80,7 @@ class ItemController extends Controller
     public function exportPdf()
     {
         // items that stock is not null
-        $items = Item::all();
+        $items = Item::whereNotNull('stock')->get();
         $pdf =Pdf::loadView('items/pdf', compact('items'));
         return $pdf->download('items.pdf');
     }
