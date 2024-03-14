@@ -37,6 +37,7 @@
                         <th>Costo</th>
                         <th>Precio</th>
                         <th>Stock</th>
+                        <th>Nuevo</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,6 +49,7 @@
                             <td class="border">{{ $item->cost }}</td>
                             <td class="border">{{ $item->price }}</td>
                             <td class="border">{{ $item->stock }}</td>
+                            <td class="border"></td>
                         </tr>
                     @endforeach
                 </tbody>
