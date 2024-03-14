@@ -4,20 +4,25 @@
             <x-card-container>
                 <h2 class="text-2xl font-semibold">Detalles del {{ $item->is_service ? 'Servicio' : 'Producto' }}</h2>
                 <ul class="mt-4">
-                    <li><i class="bi bi-plus"></i> Creado el: {{ $item->created_at }}</li>
-                    @if ($item->created_at != $item->updated_at)
-                        <li><i class="bi bi-arrow-clockwise"></i> Modificado el: {{ $item->updated_at }}</li>
-                    @endif
                     <li>ID: {{ $item->id }}</li>
+                    <li> Creado el: {{ $item->created_at }}</li>
+                    @if ($item->created_at != $item->updated_at)
+                        <li> Modificado el: {{ $item->updated_at }}</li>
+                    @endif
                     <li>
-                        @if ($sales && $sales->count() > 0)
-                            <label class="text-green-500"> {{ $sales->count() }} ventas</label>
-                        @else
-                            <label class="text-red-500">Sin ventas</label>
-                        @endif
+                        <label class="{{ ($sales && $sales->count() > 0) ? 'text-green-500' : 'text-red-500' }}">
+                            {{ ($sales && $sales->count() > 0) ? $sales->count() . ' ventas' : 'Sin ventas' }}
+                        </label>
                     </li>
                 </ul>
+                <x-button
+                    onclick="Livewire.dispatch('openModal', { component: 'new-item', arguments: { item: {{ $item }} }})"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
+                    Editar
+                </x-button>
             </x-card-container>
+
+
             @if (session('success'))
                 <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
                     {{ session('success') }}
