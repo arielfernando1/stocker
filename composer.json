@@ -8,6 +8,7 @@
         "php": "^8.1",
         "barryvdh/laravel-dompdf": "^2.1",
         "guzzlehttp/guzzle": "^7.2",
+        "inspector-apm/inspector-laravel": "^4.8",
         "laravel/framework": "^10.10",
         "laravel/jetstream": "^4.0",
         "laravel/sanctum": "^3.2",
@@ -17,6 +18,7 @@
         "wire-elements/modal": "^2.0@beta"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.12",
         "fakerphp/faker": "^1.9.1",
         "laravel-lang/common": "^6.1",
         "laravel/pint": "^1.0",

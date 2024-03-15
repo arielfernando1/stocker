@@ -17,9 +17,8 @@ class SaleFactory extends Factory
     public function definition(): array
     {
         return [
-            'created_at' => $this->faker->dateTimeBetween('-3 year', 'now'),
-            'item_id' => $this->faker->numberBetween(1, 100),
-            'quantity' => $this->faker->numberBetween(1, 10),
+            'client_id' => null,
+            'paid' => true,
             'total' => $this->faker->randomFloat(2, 0, 1000),
         ];
     }
