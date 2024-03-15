@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('sales', function (Blueprint $table) {
             // add fields
-            $table->boolean('paid')->default(0);
+            $table->boolean('paid')->default(1);
             $table->foreignId('client_id')->nullable()->constrained();
 
         });
