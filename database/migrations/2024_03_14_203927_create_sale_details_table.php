@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('sale_details', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('sale_id')->constrained();
+            $table->foreignId('sale_id')->nullable()->constrained();
             $table->foreignId('item_id')->constrained();
             $table->integer('quantity');
-            $table->decimal('total', 10, 2);
+            $table->decimal('total', 10, 2)->default(0);
         });
     }
 

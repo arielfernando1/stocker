@@ -5,7 +5,7 @@ namespace App\Livewire;
 use App\Models\Sale;
 use Illuminate\Support\Facades\App;
 use LivewireUI\Modal\ModalComponent;
-use Barryvdh\DomPDF\Facade as PDF;
+
 class DaySales extends ModalComponent
 {
     public $date;

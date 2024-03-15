@@ -9,6 +9,7 @@ use App\Models\SaleDetail;
 class SalesTable extends Component
 {
     public $saleDetails = [];
+    public $sale;
     public $hidden = false;
     public function render(): \Illuminate\View\View
     {
@@ -19,11 +20,19 @@ class SalesTable extends Component
     #[On('updateSales')]
     public function mount(): void
     {
-        $this->saleDetails = SaleDetail::all();
+        $this->saleDetails = SaleDetail::where('sale_id', $this->sale->id)->get();
     }
 
     public function toggleHidden(): void
     {
         $this->hidden = !$this->hidden;
+    }
+    public function deleteSaleDetail(int $id): void
+    {
+        SaleDetail::find($id)->delete();
+        $this->saleDetails = SaleDetail::where('sale_id', $this->sale->id)->get();
+        $this->sale->update([
+            'total' => $this->saleDetails->sum('total')
+        ]);
     }
 }

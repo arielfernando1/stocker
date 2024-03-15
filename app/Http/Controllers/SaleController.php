@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSaleRequest;
 use App\Http\Requests\UpdateSaleRequest;
+use App\Models\Business;
 use App\Models\Sale;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class SaleController extends Controller
 {
@@ -62,5 +64,14 @@ class SaleController extends Controller
     public function destroy(Sale $sale)
     {
         //
+    }
+
+    public function print(Sale $sale)
+    {
+        $business = Business::first();
+        $pdf = PDF::loadView('sales.print', compact('sale', 'business'));
+        // 80 mm width
+        $pdf->setPaper([0, 0, 227.559, 500.906], 'portrait');
+        return $pdf->stream('ticket.pdf');
     }
 }

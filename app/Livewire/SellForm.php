@@ -11,6 +11,7 @@ use Livewire\Component;
 
 class SellForm extends Component
 {
+    public Sale $sale;
     public $items = [];
     public $saleDetails = [];
     public $selectedItem = null;
@@ -30,6 +31,7 @@ class SellForm extends Component
     {
         $this->loadItems();
         $this->saleDetails = SaleDetail::all();
+        $this->sale = Sale::where('paid', false)->latest()->first() ?? Sale::create();
     }
 
     public function loadItems()
@@ -50,7 +52,6 @@ class SellForm extends Component
         $this->is_service = $item->is_service ?? false;
         $this->updateMaxQuantity();
         $this->calculateTotal();
-
     }
 
 
@@ -105,28 +106,50 @@ class SellForm extends Component
         }
     }
 
-    public function save()
+    public function addToCart()
     {
         $this->validateInput();
-
-        $sale = Sale::create([
-            // 'item_id' => $this->selectedItem,
-            'client_id' => null,
-            // 'quantity' => $this->quantity,
-            // 'total' => $this->total,
-        ]);
+        $itemInCart = $this->sale->saleDetails->where('item_id', $this->selectedItem)->first();
+        if ($itemInCart) {
+            $itemInCart->quantity += $this->quantity;
+            $itemInCart->total += $this->total;
+            $itemInCart->save();
+            $this->updateStock();
+            $this->dispatch('saleAdded', selectedItem: $this->selectedItem);
+            $this->dispatch('updateSales');
+            $this->resetForm();
+            return;
+        }
 
         SaleDetail::create([
-            'sale_id' => $sale->id,
+            'sale_id' => $this->sale->id,
             'item_id' => $this->selectedItem,
             'quantity' => $this->quantity,
             'total' => $this->total,
         ]);
 
-        $this->updateStock();
+        $this->sale->total += $this->total;
+        $this->sale->save();
         $this->dispatch('saleAdded', selectedItem: $this->selectedItem);
         $this->dispatch('updateSales');
         $this->resetForm();
+    }
+
+    public function saveSale()
+    {
+        // check if there are items in the cart
+        if ($this->sale->saleDetails->count() == 0) {
+            $this->dispatch('emptyCart');
+            return;
+        }
+        $this->sale->total = $this->sale->saleDetails->sum('total');
+        $this->sale->paid = true;
+        $this->sale->save();
+        $this->dispatch('updateSales');
+        $this->resetForm();
+        return redirect()->route('sell');
+
+
     }
 
     private function validateInput()

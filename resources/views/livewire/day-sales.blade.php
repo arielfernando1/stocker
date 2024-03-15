@@ -10,24 +10,23 @@
         <thead>
             <tr class="bg-gray-200">
                 <th class="px-4 py-2">Hora</th>
-                <th class="px-4 py-2">Item</th>
-                <th class="px-4 py-2">Cantidad</th>
+                <th class="px-4 py-2">Items</th>
                 <th class="px-4 py-2">Total</th>
+
             </tr>
         </thead>
         <tbody>
             @foreach ($sales as $sale)
                 <tr class="border-b border-gray-300">
                     <td>{{ $sale->created_at->format('H:i:s') }}</td>
-                    <td>{{ $sale->item->name }}</td>
-                    <td>{{ $sale->quantity }}</td>
+                    <td>{{ $sale->saleDetails->count() }}</td>
                     <td>{{ $sale->total }}</td>
                 </tr>
             @endforeach
         </tbody>
         <tfoot>
             <tr class="bg-gray-200">
-                <td class="px-4 py-2" colspan="3">Total</td>
+                <td class="px-4 py-2" colspan="2">Total</td>
                 <td class="px-4 py-2">{{ '$' . $sales->sum('total') }}</td>
             </tr>
         </tfoot>

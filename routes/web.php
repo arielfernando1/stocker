@@ -90,4 +90,5 @@ Route::middleware([
     Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
     # Sales
     Route::post('/sales', [SaleController::class, 'store'])->name('sales.store');
+    Route::get('/sale/print/{sale}', [SaleController::class, 'print'])->name('print');
 });
