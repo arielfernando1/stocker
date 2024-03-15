@@ -37,40 +37,4 @@
             @endif
         </div>
     </div>
-    {{-- <script>
-        $('#deleteForm').submit(function(e) {
-            e.preventDefault();
-            Swal.fire({
-                title: '¿Estas seguro?',
-                icon: 'warning',
-                text: "¡No podras revertir esto! Se eliminara el producto: {{ $item->name }} y todas sus ventas.",
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Si, eliminar',
-                cancelButtonText: 'Cancelar',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // submit the form
-                    $('#deleteForm').unbind('submit').submit();
-
-                }
-            });
-        });
-        $('#productForm').change(function() {
-            $('#productForm').data('changed', true);
-        });
-        $('#productForm').change(function() {
-            $('#updateProduct').prop('disabled', false);
-        });
-        var nameInput = document.getElementById('name');
-        var brandInput = document.getElementById('brand');
-        nameInput.addEventListener('keyup', function() {
-            this.value = this.value.toUpperCase();
-        });
-
-        brandInput.addEventListener('keyup', function() {
-            this.value = this.value.toUpperCase();
-        });
-    </script> --}}
 </x-app-layout>

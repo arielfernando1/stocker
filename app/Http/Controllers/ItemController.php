@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreItemRequest;
 use App\Models\Item;
+use App\Models\SaleDetail;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 
@@ -41,9 +42,7 @@ class ItemController extends Controller
     public function show(Item $item)
     {
         $item = Item::find($item->id);
-        $sales = DB::table('sales')
-            ->where('item_id', $item->id)
-            ->get();
+        $sales = SaleDetail::all();
         return view('items/show', [
             'item' => $item,
             'sales' => $sales,

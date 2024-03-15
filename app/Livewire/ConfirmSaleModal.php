@@ -35,9 +35,19 @@ class ConfirmSaleModal extends ModalComponent
         $this->sale->update([
             'paid' => true,
         ]);
+        $this->updateStock();
         $this->dispatch('updateSales');
         $this->closeModal();
         return redirect()->route('sell');
+    }
+
+    public function updateStock()
+    {
+        foreach ($this->sale->saleDetails as $saleDetail) {
+            $saleDetail->item->update([
+                'stock' => $saleDetail->item->stock - $saleDetail->quantity,
+            ]);
+        }
     }
 
     public function printTicket()

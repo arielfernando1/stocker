@@ -13,7 +13,7 @@ class SalesTable extends Component
     public $hidden = false;
     public function render(): \Illuminate\View\View
     {
-        return view('livewire.sales-table');
+        return count($this->saleDetails) ? view('livewire.sales-table') : view('livewire.no-data');
     }
 
 

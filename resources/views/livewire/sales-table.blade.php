@@ -29,8 +29,8 @@
                     <td>{{ $detail->item->price }}</td>
                     <td>{{ $detail->total }}</td>
                     <td>
-                        <x-button wire:click="deleteSaleDetail({{ $detail->id }})"><i
-                                class="bi bi-trash"></i></x-button>
+                        <x-button wire:click="deleteSaleDetail({{ $detail->id }})"
+                            class="bg-red-500 hover:bg-red-700"><i class="bi bi-trash"></i></x-button>
                     </td>
                 </tr>
             @endforeach
@@ -49,6 +49,9 @@
             </tr>
         </tfoot>
     </table>
+    <script>
+
+    </script>
 
 
 </div>

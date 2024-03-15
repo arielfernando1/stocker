@@ -114,6 +114,11 @@ class SellForm extends Component
     public function addToCart()
     {
         $this->validateInput();
+        if ($this->stock < $this->quantity) {
+            $this->dispatch('noStock');
+            return;
+        }
+
         $itemInCart = $this->sale->saleDetails->where('item_id', $this->selectedItem)->first();
         if ($itemInCart) {
             $itemInCart->quantity += $this->quantity;

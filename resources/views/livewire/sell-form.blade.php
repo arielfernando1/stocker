@@ -33,7 +33,7 @@
                     <div class="col-sm-10">
                         <div wire:ignore>
                             <select class="form-control" id="items">
-                                <option value="">Seleccionar prod. o serv.</option>
+                                <option value="">Seleccionar prod. o serv. [P]</option>
                                 @foreach ($items as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }} {{ $item->brand }}</option>
                                 @endforeach
@@ -65,19 +65,16 @@
                     </div>
                 </div>
 
-                <button id="register" type="submit"
-                    class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-xl"><i
-                        class="bi bi-cash"></i>
-                    Agregar [Enter]</button>
-                {{-- <button type="button" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-xl"
-                    onclick="clearCart()"><i class="bi bi-trash"></i>
-                    Limpiar</button> --}}
+                <x-button id="register" type="submit"><i class="bi bi-plus"></i>
+                    Agregar [A]</x-button>
             </form>
         </div>
         <div class="mx-4 bg-white shadow-md rounded-lg p-4">
             <livewire:sales-table :sale="$sale" />
             <div class="flex justify-end my-4">
-                <x-button wire:click="$dispatch('openModal', { component: 'confirm-sale-modal', arguments: { sale: {{ $sale }} }})">Cobrar</x-button>
+                <x-button id='charge' class="bg-green-500 hover:bg-green-700"
+                    wire:click="$dispatch('openModal', { component: 'confirm-sale-modal', arguments: { sale: {{ $sale }} }})">
+                    <i class="bi bi-cash mx-1"></i> Cobrar [Enter] </x-button>
 
             </div>
         </div>
@@ -99,11 +96,16 @@
     });
 
     $(document).keypress(function(e) {
-        if (e.which == 13) {
+        // A key
+        if (e.which == 97) {
             $('#register').click();
         }
         if (e.which == 112) {
             $('#items').select2('open');
+        }
+        //enter key
+        if (e.which == 13) {
+            $('#charge').click();
         }
     });
 
