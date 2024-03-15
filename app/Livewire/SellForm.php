@@ -54,7 +54,7 @@ class SellForm extends Component
         $item = $this->getItem();
         $this->price = $item->price ?? 0;
         $this->stock = $item->stock ?? 0;
-        $this->is_service = $item->is_service ?? false;
+        $this->is_service = $item->stock ?? true;
         $this->updateMaxQuantity();
         $this->calculateTotal();
     }
@@ -114,11 +114,10 @@ class SellForm extends Component
     public function addToCart()
     {
         $this->validateInput();
-        if ($this->stock < $this->quantity) {
+        if (!$this->is_service) {
             $this->dispatch('noStock');
             return;
         }
-
         $itemInCart = $this->sale->saleDetails->where('item_id', $this->selectedItem)->first();
         if ($itemInCart) {
             $itemInCart->quantity += $this->quantity;
