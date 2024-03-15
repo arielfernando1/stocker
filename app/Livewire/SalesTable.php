@@ -4,22 +4,22 @@ namespace App\Livewire;
 
 use Livewire\Attributes\On;
 use Livewire\Component;
-use App\Models\Sale;
+use App\Models\SaleDetail;
 
 class SalesTable extends Component
 {
-    public $sales;
+    public $saleDetails = [];
     public $hidden = false;
     public function render(): \Illuminate\View\View
     {
-        return $this->sales->count() ? view('livewire.sales-table') : view('livewire.no-data');
+        return view('livewire.sales-table');
     }
 
 
     #[On('updateSales')]
     public function mount(): void
     {
-        $this->sales = Sale::whereDate('created_at', date('Y-m-d'))->get();
+        $this->saleDetails = SaleDetail::all();
     }
 
     public function toggleHidden(): void

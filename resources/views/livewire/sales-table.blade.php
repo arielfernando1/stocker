@@ -4,11 +4,15 @@
             <tr>
                 <th
                     class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider dark:bg-gray-700">
-                    Hora
+                    Cantidad
                 </th>
                 <th
                     class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider dark:bg-gray-700">
-                    Detalle
+                    Item
+                </th>
+                <th
+                    class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider dark:bg-gray-700">
+                    V. Unit
                 </th>
                 <th
                     class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider dark:bg-gray-700">
@@ -17,9 +21,9 @@
             </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-700 select-none">
-            @foreach ($sales as $sale)
+            @foreach ($saleDetails as $sale)
                 <tr>
-                    <td class="px-6 py-1 whitespace-nowrap">
+                    {{-- <td class="px-6 py-1 whitespace-nowrap">
                         {{ $sale->created_at->format('H:i:s') }}
                     </td>
                     <td wire:click="$dispatch('openModal', { component: 'show-sale', arguments: {sale: {{ $sale }}} })"
@@ -32,7 +36,13 @@
                     </td>
                     <td class="px-6 py-1 whitespace-nowrap">
                         {{ $sale->total }}
-                    </td>
+                        {}
+                    </td> --}}
+                    <td>{{ $sale->quantity }}</td>
+                    <td>{{ $sale->item->name }}</td>
+                    <td>{{ $sale->item->price }}</td>
+                    <td>{{ $sale->total }}</td>
+
                 </tr>
             @endforeach
         </tbody>
@@ -42,11 +52,9 @@
                     <strong>Total</strong>
                 </td>
                 <td></td>
+                <td></td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    <strong id="totalDay"
-                        @if ($hidden) style="display:none" @endif>${{ $sales->sum('total') }}</strong>
-                    <i id="eye" class="bi @if ($hidden) bi-eye @else bi-eye-slash @endif"
-                        wire:click="toggleHidden"></i>
+                    <strong id="totalDay">${{ $saleDetails->sum('total') }}</strong>
                 </td>
             </tr>
         </tfoot>

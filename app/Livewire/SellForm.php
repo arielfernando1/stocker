@@ -5,12 +5,14 @@ namespace App\Livewire;
 use App\Models\Business;
 use App\Models\Item;
 use App\Models\Sale;
+use App\Models\SaleDetail;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
 class SellForm extends Component
 {
     public $items = [];
+    public $saleDetails = [];
     public $selectedItem = null;
     public $price = 0;
     public $stock = 0;
@@ -27,6 +29,7 @@ class SellForm extends Component
     public function mount()
     {
         $this->loadItems();
+        $this->saleDetails = SaleDetail::all();
     }
 
     public function loadItems()
@@ -47,7 +50,10 @@ class SellForm extends Component
         $this->is_service = $item->is_service ?? false;
         $this->updateMaxQuantity();
         $this->calculateTotal();
+
     }
+
+
 
     public function getItem()
     {
@@ -103,7 +109,15 @@ class SellForm extends Component
     {
         $this->validateInput();
 
-        Sale::create([
+        $sale = Sale::create([
+            // 'item_id' => $this->selectedItem,
+            'client_id' => null,
+            // 'quantity' => $this->quantity,
+            // 'total' => $this->total,
+        ]);
+
+        SaleDetail::create([
+            'sale_id' => $sale->id,
             'item_id' => $this->selectedItem,
             'quantity' => $this->quantity,
             'total' => $this->total,
