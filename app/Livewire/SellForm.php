@@ -31,7 +31,12 @@ class SellForm extends Component
     {
         $this->loadItems();
         $this->saleDetails = SaleDetail::all();
-        $this->sale = Sale::where('paid', false)->latest()->first() ?? Sale::create();
+        $this->sale = Sale::where('paid', false)->latest()->first() ?? Sale::create(
+            [
+                'paid' => false,
+                'total' => 0,
+            ]
+        );
     }
 
     public function loadItems()
@@ -148,8 +153,6 @@ class SellForm extends Component
         $this->dispatch('updateSales');
         $this->resetForm();
         return redirect()->route('sell');
-
-
     }
 
     private function validateInput()
