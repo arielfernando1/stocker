@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('bill_id')->nullable()->constrained();
             $table->foreignId('item_id')->constrained();
             $table->boolean('quantity')->default(1);
-            $table->decimal('total', 10, 2)->default(0);
+            $table->decimal('total', 10, 2)->nullable();
         });
     }
 
